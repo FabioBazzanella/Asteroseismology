@@ -1,6 +1,6 @@
 # 🌟 Ajuste de Modelos Estelares Pulsantes
 
-> Ferramenta otimizada em C para análise e ajuste de modelos teóricos de estrelas pulsantes, comparando períodos observados com grades de modelos estelares.
+> Ferramenta para ajuste asterossismológico de anãs brancas pulsantes, baseada na comparação entre períodos observados e modelos teóricos de pulsação.
 
 ## 🔭 Visão Geral
 
