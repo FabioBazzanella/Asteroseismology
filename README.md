@@ -1,5 +1,5 @@
 =========================================================
-      GUIA DO ARQUIVO DE ENTRADA (INPUT FILE)
+      GUIA DO ARQUIVO DE ENTRADA (estrelas.txt)
 =========================================================
 
 Este arquivo de entrada é utilizado para configurar os
