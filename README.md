@@ -1,6 +1,6 @@
 # 🌟 Ajuste de Modelos Estelares Pulsantes
 
-> Ferramenta para ajuste asterossismológico de anãs brancas pulsantes, baseada na comparação entre períodos observados e modelos teóricos de pulsação.
+> Ferramenta para ajuste asterossismológico baseada na comparação entre períodos observados e modelos teóricos de pulsação estelar.
 
 ## 🔭 Visão Geral
 
