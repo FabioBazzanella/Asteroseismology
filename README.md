@@ -23,6 +23,8 @@ Os resultados incluem, entre outros parâmetros:
 ├── estrelas.txt
 ├── ordenarResultadoFinal.sh
 └── massas/
+└── Resultados/
+
 ```
 
 ## Importante
