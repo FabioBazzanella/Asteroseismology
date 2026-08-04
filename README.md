@@ -1,108 +1,227 @@
-# Ajuste de Modelos Estelares e Cálculo de Chi-Quadrado
+# Ajuste de Modelos Estelares
 
-Este repositório contém as rotinas em C e Python para processar grades de modelos estelares, calcular o chi-quadrado comparando períodos teóricos com observações e extrair os melhores ajustes (Teff, massa e parâmetros sísmicos).
+Ferramenta para ajuste de modelos estelares pulsantes através da comparação entre períodos observados e períodos teóricos utilizando o método do **chi-quadrado**.
 
-## ⚠️ IMPORTANTE: Como preparar o seu ambiente (Onde colocar os dados)
-
-Por questões de armazenamento, os dados pesados das malhas de modelos estelares NÃO estão incluídos neste repositório do GitHub. Ao clonar ou baixar este projeto, você receberá apenas os códigos-fonte e os scripts de automação.
-
-Para que o programa funcione na sua máquina, você deve fornecer a sua própria pasta de modelos estelares e ela deve obrigatoriamente se chamar `massas/`.
-
-### Passo a passo para o usuário:
-1. Baixe todos os arquivos deste repositório.
-2. Cole a sua pasta `massas/` na raiz do projeto (mesmo nível do arquivo `codigo.c`).
-3. A sua grade de modelos estelares deve estar estruturada descendo até o nível da massa de hidrogênio, contendo o arquivo `parametros.dat` e os modelos `.sal` / `.sal2`.
-
-Seu diretório local deve ficar EXATAMENTE com esta estrutura antes de você compilar ou rodar o código:
-
-seu-diretorio-local/
-├── codigo.c                   <-- Baixado deste Git
-├── codigo.py                  <-- Baixado deste Git
-├── ordenarResultadoFinal.sh   <-- Baixado deste Git
-├── estrelas.txt               <-- Baixado deste Git (edite com seus inputs)
-└── massas/                    <-- VOCÊ PRECISA COLOCAR ESSA PASTA AQUI
-    └── subpasta_massaSolar/
-        └── subpasta_massaDeHidrogenio/
-            ├── parametros.dat
-            ├── *.sal
-            └── *.sal2
+O projeto percorre uma grade de modelos estelares, calcula o valor de χ² para cada modelo e retorna os melhores candidatos, juntamente com seus parâmetros físicos (Teff, massa, espessura da camada de hidrogênio e demais parâmetros sísmicos).
 
 ---
 
-## 🚀 Como Compilar e Executar
+# Estrutura do projeto
 
-1. Prepare os dados: Certifique-se de que a pasta `massas/` e o arquivo `estrelas.txt` estão configurados conforme a estrutura acima.
-2. Abra o terminal na pasta raiz do projeto.
-3. Compile o código em C (o parâmetro `-lm` é necessário para linkar a biblioteca matemática):
-   
-   gcc codigo.c -o calcular_estrelas -lm
+```
+.
+├── codigo.c
+├── codigo.py
+├── estrelas.txt
+├── ordenarResultadoFinal.sh
+└── massas/
+```
 
-4. Execute o programa:
-   
-   ./calcular_estrelas
+A pasta **`massas/`** **não acompanha este repositório**, pois contém vários gigabytes de modelos estelares.
 
-Nota sobre Resultados: Após a execução, a pasta `Resultados/` será gerada automaticamente na raiz deste diretório e o script `ordenarResultadoFinal.sh` organizará as saídas finais.
+Você deve copiar sua própria grade de modelos para essa pasta.
+
+A estrutura esperada é:
+
+```
+massas/
+└── massa_solar/
+    └── massa_hidrogenio/
+        ├── parametros.dat
+        ├── *.sal
+        └── *.sal2
+```
 
 ---
 
-## ⚙️ GUIA DO ARQUIVO DE ENTRADA (estrelas.txt)
+# Instalação
 
-Este arquivo de entrada é utilizado para configurar os parâmetros da estrela e os dados dos períodos observados para a rotina de ajuste. O arquivo deve ser formatado em texto puro, respeitando estritamente a ordem das linhas.
+Clone ou baixe este repositório.
 
-=========================================================
-      ESTRUTURA DO ARQUIVO (Linha por Linha)
-=========================================================
+Depois copie sua pasta `massas/` para a raiz do projeto.
 
-Linha 1: Nome da Estrela
-         Exemplo: G117-B15A
+A estrutura final deve ficar assim:
 
-Linha 2: Valor de Chi
-         Exemplo: 0, 1, 1.5, 2, 3...
+```
+projeto/
+├── codigo.c
+├── codigo.py
+├── estrelas.txt
+├── ordenarResultadoFinal.sh
+└── massas/
+```
 
-Linha 3: Temperatura Efetiva (Teff)
-         Define o limite de temperatura a ser analisado.
-         - Digite "0" : Sem filtro (range de 0 a infinito).
-         - Digite "x y" : Para definir um intervalo específico
-           separado por espaço (ex: "11000 12000"):
-           [Limite Inferior da Teff]   [Limite Superior da Teff]
+---
 
-Linha 4: Massa
-         Define o limite de massa solar a ser analisado.
-         - Digite "0" : Sem filtro (range de 0 a infinito).
-         - Digite "x y" : Para definir um intervalo específico
-           separado por espaço (ex: "0.5 0.7"):
-           [Limite Inferior da massa]   [Limite Superior da massa]
+# Compilação
 
-Linha 5 em diante: Modos de Pulsação (Períodos)
-         Cada linha a partir daqui representa um período
-         observado, contendo 3 colunas separadas por espaços
-         ou tabulações:
-         
-         [Período]   [Amplitude]   [Grau Esférico (l)]
+Compile o código em C:
 
-         Regras exclusivas para a coluna do Grau Esférico (l):
-         - 0 : Parâmetro livre. O programa testará e escolherá 
-               automaticamente entre l=1 ou l=2.
-         - 1 : Modo fixado manualmente pelo pesquisador em l=1.
-         - 2 : Modo fixado manualmente pelo pesquisador em l=2.
+```bash
+gcc codigo.c -o calcular_estrelas -lm
+```
 
-=========================================================
-      EXEMPLO PRÁTICO DE ARQUIVO E EXPLICAÇÃO
-=========================================================
+O parâmetro `-lm` é necessário para utilizar a biblioteca matemática.
 
+---
+
+# Execução
+
+Execute o programa com:
+
+```bash
+./calcular_estrelas
+```
+
+Ao final da execução será criada automaticamente a pasta
+
+```
+Resultados/
+```
+
+contendo todos os arquivos gerados.
+
+O script
+
+```
+ordenarResultadoFinal.sh
+```
+
+é executado automaticamente para organizar os resultados finais.
+
+---
+
+# Arquivo de entrada (`estrelas.txt`)
+
+O arquivo `estrelas.txt` define os parâmetros da estrela observada e os períodos utilizados no ajuste.
+
+Sua estrutura deve seguir exatamente a ordem abaixo.
+
+| Linha | Conteúdo |
+|-------|----------|
+| 1 | Nome da estrela |
+| 2 | Valor do χ |
+| 3 | Intervalo de Teff |
+| 4 | Intervalo de massa |
+| 5 em diante | Períodos observados |
+
+---
+
+## Linha 1
+
+Nome da estrela.
+
+Exemplo:
+
+```
+G117-B15A
+```
+
+---
+
+## Linha 2
+
+Valor do χ utilizado no ajuste.
+
+Exemplo:
+
+```
+3
+```
+
+---
+
+## Linha 3 – Temperatura efetiva (Teff)
+
+Pode assumir dois formatos.
+
+Sem restrição:
+
+```
+0
+```
+
+Intervalo:
+
+```
+11000 12000
+```
+
+---
+
+## Linha 4 – Massa
+
+Pode assumir dois formatos.
+
+Sem restrição:
+
+```
+0
+```
+
+Intervalo:
+
+```
+0.50 0.70
+```
+
+---
+
+## Linha 5 em diante
+
+Cada linha representa um modo observado.
+
+Formato:
+
+```
+Período    Amplitude    l
+```
+
+Exemplo:
+
+```
+215.20   17.36   1
+270.46    6.14   1
+304.05    7.48   1
+```
+
+### Coluna **l**
+
+| Valor | Significado |
+|--------|-------------|
+| 0 | O programa testa automaticamente entre l=1 e l=2 |
+| 1 | Modo fixado em l=1 |
+| 2 | Modo fixado em l=2 |
+
+---
+
+# Exemplo completo
+
+```
 G117-B15A
 3
 0
-0.5 0.7
-215.20      17.36      1
-270.46      06.14      1
-304.05      07.48      1
+0.50 0.70
+215.20 17.36 1
+270.46  6.14 1
+304.05  7.48 1
+```
 
-Explicação:
-- G117-B15A : Estrela analisada.
-- 3         : Valor do chi configurado como 3.
-- 0         : Teff sem filtro (livre de 0 a infinito).
-- 0.5 0.7   : Massa com filtro (entre 0.5 a 0.7 massas solares).
-- Linhas finais: Foram inseridos 3 períodos (215.20, 270.46 
- e 304.05) com suas respectivas amplitudes. O pesquisador 
- fixou todos os modos em l=1 (terceira coluna).
+Nesse exemplo:
+
+- estrela: **G117-B15A**
+- χ = **3**
+- Teff sem restrição
+- massa entre **0.50 e 0.70 M☉**
+- três modos observados, todos fixados com **l = 1**
+
+---
+
+# Saída
+
+Ao término da execução, o programa gera automaticamente:
+
+- resultados do cálculo de χ²;
+- melhores modelos encontrados;
+- parâmetros físicos correspondentes;
+- arquivos organizados na pasta `Resultados/`.
