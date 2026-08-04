@@ -125,6 +125,7 @@ Onde:
 
 
 2) - 🖥️ Arquivos Gerados
+
 O sistema estrutura os resultados aprovados de forma categorizada. Para cada estrela processada, é criado um subdiretório específico:
 ```text
 Resultados/
