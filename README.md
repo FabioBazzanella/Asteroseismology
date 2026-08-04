@@ -1,115 +1,41 @@
-# Ajuste de Modelos Estelares
-
-Ferramenta para ajuste de modelos estelares pulsantes através da comparação entre períodos observados e períodos teóricos utilizando o método do **chi-quadrado**.
-
-O projeto percorre uma grade de modelos estelares, calcula o valor de χ² para cada modelo e retorna os melhores candidatos, juntamente com seus parâmetros físicos (Teff, massa, espessura da camada de hidrogênio e demais parâmetros sísmicos).
-
----
-
-# Estrutura do projeto
-
-```
-.
-├── codigo.c
-├── codigo.py
-├── estrelas.txt
-├── ordenarResultadoFinal.sh
-└── massas/
-```
-
-A pasta **`massas/`** **não acompanha este repositório**, pois contém vários gigabytes de modelos estelares.
-
-Você deve copiar sua própria grade de modelos para essa pasta.
-
-A estrutura esperada é:
-
-```
-massas/
-└── massa_solar/
-    └── massa_hidrogenio/
-        ├── parametros.dat
-        ├── *.sal
-        └── *.sal2
-```
-
----
-
-# Instalação
-
-Clone ou baixe este repositório.
-
-Depois copie sua pasta `massas/` para a raiz do projeto.
-
-A estrutura final deve ficar assim:
-
-```
-projeto/
-├── codigo.c
-├── codigo.py
-├── estrelas.txt
-├── ordenarResultadoFinal.sh
-└── massas/
-```
-
----
-
-# Compilação
-
-Compile o código em C:
-
-```bash
-gcc codigo.c -o calcular_estrelas -lm
-```
-
-O parâmetro `-lm` é necessário para utilizar a biblioteca matemática.
-
----
-
-# Execução
-
-Execute o programa com:
-
-```bash
-./calcular_estrelas
-```
-
-Ao final da execução será criada automaticamente a pasta
-
-```
-Resultados/
-```
-
-contendo todos os arquivos gerados.
-
-O script
-
-```
-ordenarResultadoFinal.sh
-```
-
-é executado automaticamente para organizar os resultados finais.
-
----
-
 # Arquivo de entrada (`estrelas.txt`)
 
-O arquivo `estrelas.txt` define os parâmetros da estrela observada e os períodos utilizados no ajuste.
+O arquivo `estrelas.txt` contém uma ou mais estrelas que serão processadas em sequência.
 
-Sua estrutura deve seguir exatamente a ordem abaixo.
+Cada estrela é descrita por um **bloco** de informações. Após o último período observado de uma estrela, basta iniciar imediatamente o bloco da próxima estrela.
+
+A estrutura geral é:
+
+```
+Nome da estrela
+Valor de χ
+Intervalo de Teff
+Intervalo de massa
+Período  Amplitude  l
+Período  Amplitude  l
+Período  Amplitude  l
+...
+
+Nome da próxima estrela
+Valor de χ
+...
+```
+
+Cada bloco possui a seguinte estrutura.
 
 | Linha | Conteúdo |
-|-------|----------|
+|------:|----------|
 | 1 | Nome da estrela |
-| 2 | Valor do χ |
-| 3 | Intervalo de Teff |
+| 2 | Valor de χ |
+| 3 | Intervalo de temperatura efetiva (Teff) |
 | 4 | Intervalo de massa |
-| 5 em diante | Períodos observados |
+| 5 em diante | Modos observados |
 
 ---
 
-## Linha 1
+## Nome da estrela
 
-Nome da estrela.
+Pode ser qualquer identificação.
 
 Exemplo:
 
@@ -119,59 +45,76 @@ G117-B15A
 
 ---
 
-## Linha 2
+## Valor de χ
 
-Valor do χ utilizado no ajuste.
+Valor utilizado no cálculo do ajuste.
 
-Exemplo:
+Pode ser inteiro ou decimal.
+
+Exemplos válidos:
 
 ```
+0
+1
+1.5
+2
+2.5
 3
+3.5
+4
 ```
 
 ---
 
-## Linha 3 – Temperatura efetiva (Teff)
+## Intervalo de Teff
 
-Pode assumir dois formatos.
+Existem duas formas de informar a temperatura efetiva.
 
-Sem restrição:
+### Sem restrição
 
 ```
 0
 ```
 
-Intervalo:
+O programa considera toda a grade de temperaturas.
+
+### Com restrição
 
 ```
-11000 12000
+10985 12985
+```
+
+O programa analisará apenas modelos com
+
+```
+10985 ≤ Teff ≤ 12985
 ```
 
 ---
 
-## Linha 4 – Massa
+## Intervalo de massa
 
-Pode assumir dois formatos.
+Também pode ser informado de duas maneiras.
 
-Sem restrição:
+### Sem restrição
 
 ```
 0
 ```
 
-Intervalo:
+### Com restrição
 
 ```
-0.50 0.70
+0.493 0.693
 ```
+
+O programa analisará apenas modelos cuja massa esteja dentro desse intervalo.
 
 ---
 
-## Linha 5 em diante
+## Modos observados
 
-Cada linha representa um modo observado.
-
-Formato:
+Cada linha representa um modo observado e possui três colunas:
 
 ```
 Período    Amplitude    l
@@ -185,43 +128,38 @@ Exemplo:
 304.05    7.48   1
 ```
 
-### Coluna **l**
+### Coluna `l`
 
 | Valor | Significado |
-|--------|-------------|
-| 0 | O programa testa automaticamente entre l=1 e l=2 |
-| 1 | Modo fixado em l=1 |
-| 2 | Modo fixado em l=2 |
+|------:|-------------|
+| 0 | O programa testa automaticamente entre l = 1 e l = 2 |
+| 1 | Modo fixado em l = 1 |
+| 2 | Modo fixado em l = 2 |
 
 ---
 
-# Exemplo completo
+# Exemplo com duas estrelas
 
 ```
 G117-B15A
 3
-0
-0.50 0.70
+10985 12985
+0.493 0.693
 215.20 17.36 1
 270.46  6.14 1
 304.05  7.48 1
+
+L19-2
+1
+11105 13105
+0.605 0.805
+113.80 2.48 0
+118.70 1.20 0
+143.60 0.60 0
+192.60 6.50 0
+350.10 1.10 0
 ```
 
-Nesse exemplo:
+No exemplo acima, o programa processará primeiro **G117-B15A** e, após finalizar esse bloco, continuará automaticamente com **L19-2**.
 
-- estrela: **G117-B15A**
-- χ = **3**
-- Teff sem restrição
-- massa entre **0.50 e 0.70 M☉**
-- três modos observados, todos fixados com **l = 1**
-
----
-
-# Saída
-
-Ao término da execução, o programa gera automaticamente:
-
-- resultados do cálculo de χ²;
-- melhores modelos encontrados;
-- parâmetros físicos correspondentes;
-- arquivos organizados na pasta `Resultados/`.
+É possível adicionar quantas estrelas forem desejadas seguindo exatamente esse mesmo formato.
