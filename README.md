@@ -134,3 +134,9 @@ Resultados/
     └── ...
 ```
 Modelos que passarem nos critérios de $T_{\text{eff}}$, massa e no limite de $\chi^2$ terão seus parâmetros físicos e estatísticos exportados nestes arquivos.
+
+3) - 🖥️ Gráficos e Visualizações
+
+Como etapa final do fluxo de pós-processamento, a ferramenta gera e salva gráficos automáticos sintetizando a qualidade do ajuste astrosismológico.
+
+Essas visualizações utilizam os dados numéricos extraídos dos arquivos resultantes (como o `TESS_Nome_da_Estrela_massa1.sal`) para plotar o panorama geral das funções de mérito — especificamente o panorama do $\chi_{\text{bk}}$ em relação à massa ou à $T_{\text{eff}}$ — e a distribuição dos resíduos. Isso facilita a rápida interpretação da região de mínimo erro e a identificação visual do melhor modelo estelar na grade.
