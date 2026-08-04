@@ -1,3 +1,28 @@
+## ⚠️ IMPORTANTE: Como preparar o seu ambiente (Onde colocar os dados)
+
+Por questões de armazenamento, os dados pesados das malhas de modelos estelares **NÃO** estão incluídos neste repositório do GitHub. Ao clonar ou baixar este projeto, você receberá apenas os códigos-fonte e os scripts de automação.
+
+Para que o programa funcione na sua máquina, **você deve fornecer a sua própria pasta de modelos estelares** e ela deve obrigatoriamente se chamar `massas/`.
+
+### Passo a passo para o usuário:
+1. Baixe todos os arquivos deste repositório.
+2. Cole a sua pasta `massas/` na raiz do projeto (mesmo nível do arquivo `codigo.c`).
+
+Seu diretório local deve ficar EXATAMENTE com esta estrutura **antes** de você compilar ou rodar o código:
+
+```text
+seu-diretorio-local/
+├── codigo.c                   <-- Baixado deste Git
+├── codigo.py                  <-- Baixado deste Git
+├── ordenarResultadoFinal.sh   <-- Baixado deste Git
+├── estrelas.txt               <-- Baixado deste Git (edite com seus inputs)
+└── massas/                    <-- VOCÊ PRECISA COLOCAR ESSA PASTA AQUI
+    └── subpasta_massaSolar/
+        └── subpasta_massaDeHidrogenio/
+            ├── parametros.dat
+            ├── *.sal
+            └── *.sal2
+
 ```text
 =========================================================
       GUIA DO ARQUIVO DE ENTRADA (estrelas.txt)
