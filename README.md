@@ -19,7 +19,7 @@ Para cada estrela definida no arquivo de entrada `estrelas.txt`, o algoritmo exe
 
 ```text
 .
-├── codigo.c                 # Código-fonte principal em C (transformado em C, por uma IA, a partir do codigo escrito em python)
+├── codigo.c                 # Implementação principal em C, derivada da versão original desenvolvida em Python com auxílio de IA
 ├── codigo.py                # Script original
 ├── estrelas.txt             # Arquivo de configuração de entrada
 ├── ordenarResultadoFinal.sh # Script de pós-processamento (ordenação)
