@@ -94,6 +94,37 @@ L19-2
 
 ## 📊 Saídas e Resultados
 
+1) - 🖥️ Saída no Terminal
+
+Ao final do processamento de cada estrela, o programa exibe um resumo do melhor modelo encontrado e uma comparação entre os períodos observados e os períodos teóricos correspondentes.
+
+Exemplo:
+
+```text
+Estrela: L19-2
+-> Melhor Modelo: Massa = 0.6860 | M_H = 4.41E-05 | Modelo = 92676 | Teff = 11960.286000000000 | Erro = 0.857524000000007
+
++-----------------+-----------------+-----+-----+--------------+
+| P_observado     | P_teórico       | ℓ   | k   | Resíduo (s)  |
++-----------------+-----------------+-----+-----+--------------+
+| 113.80000000    | 113.68937000    | 2   | 2   | +0.1106      |
+| 118.70000000    | 116.35591000    | 1   | 2   | +2.3441      |
+| ...             | ...             | ... | ... | ...          |
++-----------------+-----------------+-----+-----+--------------+
+```
+
+Onde:
+
+- **Massa**: massa estelar do melhor modelo.
+- **M_H**: massa da camada de hidrogênio.
+- **Modelo**: identificador do modelo na grade.
+- **Teff**: temperatura efetiva do modelo.
+- **Erro**: valor da função de mérito utilizada para classificar o ajuste.
+- **ℓ** e **k**: identificação do modo de pulsação correspondente.
+- **Resíduo**: diferença entre o período observado e o período teórico (`P_obs − P_teórico`).
+
+
+2) - 🖥️ Arquivos Gerados
 O sistema estrutura os resultados aprovados de forma categorizada. Para cada estrela processada, é criado um subdiretório específico:
 ```text
 Resultados/
