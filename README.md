@@ -19,8 +19,8 @@ Para cada estrela definida no arquivo de entrada `estrelas.txt`, o algoritmo exe
 
 ```text
 .
-├── codigo.c                 # Código-fonte principal em C
-├── codigo.py                # Script auxiliar
+├── codigo.c                 # Código-fonte principal em C (transformado em C, por uma IA, a partir do codigo escrito em python)
+├── codigo.py                # Script original
 ├── estrelas.txt             # Arquivo de configuração de entrada
 ├── ordenarResultadoFinal.sh # Script de pós-processamento (ordenação)
 └── massas/                  # Diretório com a grade de modelos (Não incluso no repositório)
