@@ -22,7 +22,7 @@ seu-diretorio-local/
             ├── parametros.dat
             ├── *.sal
             └── *.sal2
-
+```text
  =========================================================
 
       GUIA DO ARQUIVO DE ENTRADA (estrelas.txt)
