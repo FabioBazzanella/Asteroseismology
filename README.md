@@ -124,6 +124,7 @@ Onde:
 - **Resíduo**: diferença entre o período observado e o período teórico (`P_obs − P_teórico`).
 
 
+
 2) - 🖥️ Arquivos Gerados
 
 O sistema estrutura os resultados aprovados de forma categorizada. Para cada estrela processada, é criado um subdiretório específico:
@@ -134,6 +135,8 @@ Resultados/
     └── ...
 ```
 Modelos que passarem nos critérios de $T_{\text{eff}}$, massa e no limite de $\chi^2$ terão seus parâmetros físicos e estatísticos exportados nestes arquivos.
+
+
 
 3) - 🖥️ Gráficos e Visualizações
 
