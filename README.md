@@ -140,6 +140,10 @@ Modelos que passarem nos critérios de $T_{\text{eff}}$, massa e no limite de $\
 
 3) - 🖥️ Gráficos e Visualizações
 
-Como etapa final do fluxo de pós-processamento, a ferramenta gera e salva gráficos automáticos sintetizando a qualidade do ajuste astrosismológico.
+Como etapa final do fluxo de pós-processamento, o script `ordenarResultadoFinal.sh` utiliza o *GNUPlot* para compilar e salvar visualizações gráficas da varredura (`plot_Nome_da_Estrela.png`), sintetizando a qualidade do ajuste para cada modelo da grade testada.
 
-Essas visualizações utilizam os dados numéricos extraídos dos arquivos resultantes (como o `TESS_Nome_da_Estrela_massa1.sal`) para plotar o panorama geral das funções de mérito — especificamente o panorama do $\chi_{\text{bk}}$ em relação à massa ou à $T_{\text{eff}}$ — e a distribuição dos resíduos. Isso facilita a rápida interpretação da região de mínimo erro e a identificação visual do melhor modelo estelar na grade.
+Esses gráficos extraem as métricas de erro diretamente das tabelas geradas nos arquivos `TESS_*.sal` e plotam a dispersão da Função de Mérito — por padrão, configurada para plotar a $T_{\text{eff}}$ no eixo X versus o valor de $\chi_{\text{bk}}$ no eixo Y. 
+
+A plotagem incorpora visualmente:
+- A evolução do $\chi_{\text{bk}}$ individual para os modelos de cada trilha de massa avaliada (indicada por *labels*).
+- O rastreamento automático do vale de menor erro, plotando um marcador vermelho em destaque indicando o ponto de "Melhor Ajuste" global da estrela, anotado com os parâmetros exatos de Massa, $M_H$ e o número do Modelo.
