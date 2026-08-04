@@ -49,7 +49,7 @@ gcc codigo.c -o calcular_estrelas -lm
 ```bash
 ./calcular_estrelas
 ```
-*Nota: Após o término da rotina em C, o script bash `ordenarResultadoFinal.sh` será invocado automaticamente.*
+*Nota: Após o término da rotina em C, o script `ordenarResultadoFinal.sh` será invocado automaticamente.*
 
 ## 📝 Arquivo de Entrada (`estrelas.txt`)
 
