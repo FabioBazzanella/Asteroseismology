@@ -1,3 +1,4 @@
+```text
 =========================================================
       GUIA DO ARQUIVO DE ENTRADA (estrelas.txt)
 =========================================================
@@ -66,3 +67,4 @@ EXPLICAÇÃO DO EXEMPLO ACIMA
 - Linhas finais: Foram inseridos 3 períodos (215.20, 270.46 
  e 304.05) com suas respectivas amplitudes. O pesquisador 
   fixou todos os modos em l=1 (terceira coluna).
+```
