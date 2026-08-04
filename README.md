@@ -38,7 +38,7 @@ massas/
 
 ## ⚙️ Compilação e Execução
 
-O código foi escrito em C (padrão POSIX 2008) e requer o compilador `gcc`. 
+O código foi escrito em C e requer o compilador `gcc`. 
 
 **1. Compilação:**
 ```bash
