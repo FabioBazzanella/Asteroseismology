@@ -70,7 +70,7 @@ Para cada estrela presente em `estrelas.txt`, o programa:
 
 1. Lê os dados observacionais.
 2. Percorre toda a grade de modelos.
-3. Aplica os filtros de Teff e massa (quando definidos).
+3. Aplica os filtros de χ², Teff e massa (quando definidos).
 4. Calcula o χ² para cada modelo.
 5. Ordena os modelos pelo melhor ajuste.
 6. Salva automaticamente os resultados.
